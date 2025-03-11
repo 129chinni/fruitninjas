@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Bowl - Healthy Food & Diet Suggestions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            color: #2e8b57;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 28px;
+            color: #2e8b57;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 12px 24px;
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #228b22;
+        }
+        .button:active {
+            background-color: #006400;
+        }
+        .section {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e6ffe6;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            color: #2e8b57;
+        }
+        .input-field {
+            padding: 12px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .input-field:focus {
+            border-color: #2e8b57;
+            outline: none;
+        }
+        .fruit-item {
+            display: inline-block;
+            width: 150px;
+            margin: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+        .fruit-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .fruit-name {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .fruit-price {
+            font-size: 12px;
+            color: #2e8b57;
+        }
+        .total-price {
+            font-size: 22px;
+            color: #2e8b57;
+            margin-top: 20px;
+        }
+        .home-image {
+            width: 50%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Welcome Page -->
+<div id="welcomePage" class="container section">
+    <h1>Welcome to Fruit Bowl</h1>
+    <img src="logo.jpg" width="100" height="100" alt="Fruit Bowl Image" class="home-image">
+    <p style="font-size: 20px; color: #555;"><b><i>Stay Healthy! Stay Immune!</i></b></p>
+<p><b>Welcome to Fruit Bowl</b><br>
+
+<i>A Fresh and Vibrant Experience Awaits You!</p>
+
+where freshness meets flavor! Our platform is designed to bring you a delightful mix of nature’s best, ensuring that every experience is as refreshing and nourishing as a bowl of perfectly picked fruits</i>.</p>
+    <button class="button" onclick="showLoginPage();">Login</button>
+</div>
+<!-- Login Page -->
+<div id="loginPage" class="container section">
+    <h2>Login</h2>
+    <form id="loginForm"> 	
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required><br><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" placeholder="Enter your address" required><br><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required><br><br>
+
+        <button type="button" class="button" onclick="validateForm()">Login</button>
+    </form>
+    <button class="button" onclick="showWelcomePage();">Back to Home</button>
+</div>
+ <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var email = document.getElementById("email").value;
+            var address = document.getElementById("address").value;
+            var phone = document.getElementById("phone").value;
+
+            if (username === "" || password === "" || email === "" || address === "" || phone === "") {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            alert("Login successful!");
+            showHealthSuggestionsPage();
+        }
+
+        function showWelcomePage() {
+            hideAllSections();
+            document.getElementById("welcomePage").style.display = "block";
+        }
+
+        function showLoginPage() {
+            hideAllSections();
+            document.getElementById("loginPage").style.display = "block";
+        }
+
+        function showHealthSuggestionsPage() {
+            hideAllSections();
+            document.getElementById("healthSuggestionsPage").style.display = "block";
+        }
+
+        function hideAllSections() {
+            document.querySelectorAll(".section").forEach((section) => {
+                section.style.display = "none";
+            });
+        }
+
+        window.onload = function () {
+            showWelcomePage();
+        };
+    </script>
+
+<!-- Health Condition & Suggestions Page -->
+<div id="healthSuggestionsPage" class="container section">
+    <h2>Health Suggestions</h2>
+    <h3 style="font-size: 22px; color: #333;">Choose your health issue:</h3>
+    <form id="healthForm">
+        <select id="healthIssue" class="input-field" onchange="showDietSuggestions();">
+            <option value="diabetes">Diabetes</option>
+            <option value="heart">Heart Disease</option>
+            <option value="bloodPressure">High Blood Pressure</option>
+            <option value="weightLoss">Weight Loss</option>
+            <option value="arthritis">Arthritis</option>
+            <option value="liver">Liver Disease</option>
+            <option value="cholesterol">High Cholesterol</option>
+            <option value="thyroid">Thyroid Disorders</option>
+            <option value="anemia">Anemia</option>
+            <option value="allergy">Allergy</option>
+            <option value="asthma">Asthma</option>
+            <option value="cancer">Cancer</option>
+            <option value="ulcer">Ulcer</option>
+        </select><br><br>
+    </form>
+
+    <div id="dietSuggestions" style="display: none;">
+        <h3>Diet Recommendations</h3>
+        <p id="suggestionText"></p>
+    </div>
+    
+    <button class="button" onclick="showCartPage();">Go to Cart</button>
+    <button class="button" onclick="showLoginPage();">Back to Login</button>
+</div>
+
+<!-- Cart Page with Fruits and Nuts -->
+<div id="cartPage" class="container section">
+    <h1>Your Cart</h1>
+     <p><b><i>
+    <p>Select fruits and nuts for your healthy diet:</p>
+
+    <!-- Fruit Items -->
+    <div class="fruit-item">
+        <img src="apple.jpg" alt="Apple">
+        <div class="fruit-name">Apple</div>
+        <div class="fruit-price">₹100</div>
+        <input type="checkbox" id="fruit1" value="100" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="bananna.jpg" alt="Banana">
+        <div class="fruit-name">Banana</div>
+        <div class="fruit-price">₹40</div>
+        <input type="checkbox" id="fruit2" value="40" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="orange.jpg" alt="Orange">
+        <div class="fruit-name">Orange</div>
+        <div class="fruit-price">₹60</div>
+        <input type="checkbox" id="fruit3" value="60" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="grapes.jpg" alt="Grapes">
+        <div class="fruit-name">Grapes</div>
+        <div class="fruit-price">₹120</div>
+        <input type="checkbox" id="fruit4" value="120" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="mango.jpg" alt="Mango">
+        <div class="fruit-name">Mango</div>
+        <div class="fruit-price">₹180</div>
+        <input type="checkbox" id="fruit5" value="180" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="pappa.jpg" alt="Papaya">
+        <div class="fruit-name">Papaya</div>
+        <div class="fruit-price">₹90</div>
+        <input type="checkbox" id="fruit6" value="90" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="kiwi.jpg" alt="kiwi">
+        <div class="fruit-name">kiwi</div>
+        <div class="fruit-price">₹150</div>
+        <input type="checkbox" id="fruit7" value="150" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="pine.jpg" alt="Pineapple">
+        <div class="fruit-name">Pineapple</div>
+        <div class="fruit-price">₹110</div>
+        <input type="checkbox" id="fruit8" value="110" onclick="updateCart()"> Add to Cart
+    </div>
+<!-- Nut Items -->
+    <div class="fruit-item">
+        <img src="dragon.jpg" alt="dragon fruit">
+        <div class="fruit-name">dragon fruit</div>
+        <div class="fruit-price">₹350</div>
+        <input type="checkbox" id="nut1" value="350" onclick="updateCart()"> Add to Cart
+    </div>
+
+<!-- Nut Items -->
+    <div class="fruit-item">
+        <img src="guva.jpg" alt="guava">
+        <div class="fruit-name">guava</div>
+        <div class="fruit-price">₹100</div>
+        <input type="checkbox" id="nut1" value="100" onclick="updateCart()"> Add to Cart
+    </div>
+
+<!-- Nut Items -->
+    <div class="fruit-item">
+        <img src="carrot.jpg" alt="carrot">
+        <div class="fruit-name">carrot</div>
+        <div class="fruit-price">₹50</div>
+        <input type="checkbox" id="nut1" value="50" onclick="updateCart()"> Add to Cart
+    </div>
+
+<!-- Nut Items -->
+    <div class="fruit-item">
+        <img src="keera.jpg" alt="keera">
+        <div class="fruit-name">keera</div>
+        <div class="fruit-price">₹100</div>
+        <input type="checkbox" id="nut1" value="100" onclick="updateCart()"> Add to Cart
+    </div>
+<!-- Nut Items -->
+    <div class="fruit-item">
+        <img src="sp.jpg" alt="keera">
+        <div class="fruit-name">sprouts&peanuts</div>
+        <div class="fruit-price">₹100</div>
+        <input type="checkbox" id="nut1" value="100" onclick="updateCart()"> Add to Cart
+    </div>
+
+
+    <!-- Nut Items -->
+    <div class="fruit-item">
+        <img src="all.jpg" alt="Almonds">
+        <div class="fruit-name">Almonds</div>
+        <div class="fruit-price">₹350</div>
+        <input type="checkbox" id="nut1" value="350" onclick="updateCart()"> Add to Cart
+    </div>
+    <div class="fruit-item">
+        <img src="wall.jpg" alt="Walnuts">
+        <div class="fruit-name">Walnuts</div>
+        <div class="fruit-price">₹400</div>
+        <input type="checkbox" id="nut2" value="400" onclick="updateCart()"> Add to Cart
+    </div>
+
+    <!-- Subscription Options -->
+    <h2>Select a Subscription Plan</h2>
+    <select id="subscriptionPlan" class="input-field">
+        <option value="0">Select Plan</option>
+        <option value="30">1 Month</option>
+        <option value="60">2 Month</option>
+        <option value="90">3 Months</option>
+        <option value="120">4 Month</option>
+        <option value="150">5 Month</option>
+    </select><br><br>
+<p><b>NOTE:THE QUANITTY OF  ANY ITEM YOU SELECT  WILL BE PROVIDED IN 100 GRAMS"</B></P>
+    <div class="total-price">
+        <p><strong>Total Price: ₹</strong><span id="totalPrice">0</span></p>
+    </div>
+    <a href="javascript:void(0)" onclick="showTotalPricePage();"><button class="button">Proceed to Checkout</button></a>
+    <button class="button" onclick="showHealthSuggestionsPage();">Back to Suggestions</button>
+</div>
+
+<!-- Total Price Page -->
+<div id="totalPricePage" class="container section">
+    <h1>Total Price Confirmation</h1>
+    <p>Your total price is: ₹<span id="finalTotalPrice">0</span></p>
+   <p><b><u>preview image</u></b></p>
+    <img src="pre.jpg" alt="QR Code" width="200" height="200">
+    <p><b>NOTE: we will contact you through the registered mobile number to inform you about the delivery date and other details. Thankyou!</b></p>
+    <button class="button" onclick="showDeliveryBoyPage();">Proceed to Delivery</button>
+    <button class="button" onclick="showCartPage();">Back to Cart</button>
+</div>
+
+<!-- Delivery Boy Details -->
+<div id="deliveryBoyPage" class="container section">
+    <h1>payment page</h1>
+     <p>Scan the QR code below to make your payment:</p>
+    <img src="pay.jpg" alt="QR Code" width="200" height="200">
+    <p><strong>NOTE:</strong><br>
+       payment should be done infront of the delivery boy only (if its online) </p>
+        <button class="button" onclick="showContactPage();">Contact Us</button>
+    <button class="button" onclick="showTotalPricePage();">Back to Total Price</button>
+</div>
+<!-- Payment Page -->
+<div id="paymentPage" class="container section">
+    <h1>Payment Details</h1>
+    <p>Scan the QR code below to make your payment:</p>
+    <img src="payments.jpg" alt="QR Code" width="200" height="200">
+    <p><strong>NOTE:</strong><br>
+       payment should be done infront of the delivery boy only (if its online) </p>
+    <p>
+        <button class="button" onclick="showDeliveryBoyPage(); trackGA('Payment Done Button Click')">NEXT</button>
+    </p>
+</div>
+
+<!-- Contact Details -->
+<div id="contactPage" class="container section">
+    <h1>Contact Us</h1>
+    <p>If you have any questions or issues, please reach out:</p>
+    <p>Email: support@fruitbowl.com</p>
+    <p>Phone: 9390561674<br>9966639309<br>6302943858<br></p>
+    <button class="button" onclick="showWelcomePage();">Back to Home</button>
+</div>
+
+<script>
+    // Array to store selected items' prices
+    let selectedItems = [];
+
+    // Function to update the cart
+    function updateCart() {
+        selectedItems = [];
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach((checkbox) => {
+            selectedItems.push(parseInt(checkbox.value));
+        });
+        const totalPrice = selectedItems.reduce((acc, price) => acc + price, 0);
+        document.getElementById('totalPrice').innerText = totalPrice;
+        document.getElementById('finalTotalPrice').innerText = totalPrice;
+    }
+
+    // Function to show diet suggestions based on selected health issue
+    function showDietSuggestions() {
+        const healthIssue = document.getElementById('healthIssue').value;
+        const suggestionText = document.getElementById('suggestionText');
+        const dietSuggestionsDiv = document.getElementById('dietSuggestions');
+
+        switch (healthIssue) {
+            case 'diabetes':
+                suggestionText.innerText = 'For Diabetes: Include high-fiber fruits like apples, berries, and citrus. Avoid sugary fruits and opt for whole fruits instead of juices.';
+                break;
+            case 'heart':
+                suggestionText.innerText = 'For Heart Disease: Focus on fruits like apples, pomegranates, and bananas that are rich in antioxidants. Limit intake of processed fruits.';
+                break;
+            case 'bloodPressure':
+                suggestionText.innerText = 'For High Blood Pressure: Consume potassium-rich fruits such as bananas, oranges, and apricots. Avoid salty and high-sodium foods.';
+                break;
+            case 'weightLoss':
+                suggestionText.innerText = 'For Weight Loss: Stick to low-calorie fruits like berries, watermelon, and grapefruit. Drink plenty of water and avoid sugary fruit snacks.';
+                break;
+            case 'arthritis':
+                suggestionText.innerText = 'For Arthritis: Opt for anti-inflammatory fruits such as pineapples, cherries, and berries. Avoid nightshades like tomatoes and peppers.';
+                break;
+            case 'liver':
+                suggestionText.innerText = 'For Liver Disease: Avoid alcohol and fatty foods. Include antioxidant-rich fruits such as papaya, avocado, and apples.';
+                break;
+            case 'cholesterol':
+                suggestionText.innerText = 'For High Cholesterol: Include fruits like apples, pears, and berries. Avoid processed foods and high-fat fruits.';
+                break;
+            case 'thyroid':
+                suggestionText.innerText = 'For Thyroid Disorders: Choose fruits rich in iodine, such as strawberries and blueberries, and avoid excess soy.';
+                break;
+            case 'anemia':
+                suggestionText.innerText = 'For Anemia: Include iron-rich fruits such as dried fruits, raisins, and dates. Pair them with vitamin C rich fruits like oranges.';
+                break;
+            case 'allergy':
+                suggestionText.innerText = 'For Allergy: Include anti-inflammatory fruits like berries and pineapples. Avoid citrus if sensitive to it.';
+                break;
+            case 'asthma':
+                suggestionText.innerText = 'For Asthma: Focus on fruits rich in vitamin C like oranges, strawberries, and kiwi to support lung health.';
+                break;
+            case 'cancer':
+                suggestionText.innerText = 'For Cancer: Include antioxidant-rich fruits like berries, grapes, and citrus to support immune function.';
+                break;
+            case 'ulcer':
+                suggestionText.innerText = 'For Ulcers: Choose fruits like bananas and apples that are gentle on the stomach lining.';
+                break;
+            default:
+                suggestionText.innerText = '';
+        }
+
+        dietSuggestionsDiv.style.display = 'block';
+    }
+
+    // Function to show different pages (for navigation)
+    function showPage(pageId) {
+        const pages = document.querySelectorAll('.section');
+        pages.forEach(page => {
+            page.style.display = 'none';
+        });
+        document.getElementById(pageId).style.display = 'block';
+    }
+
+    function showWelcomePage() {
+        showPage('welcomePage');
+    }
+
+    function showLoginPage() {
+        showPage('loginPage');
+    }
+
+    function showHealthSuggestionsPage() {
+        showPage('healthSuggestionsPage');
+    }
+
+    function showCartPage() {
+        showPage('cartPage');
+    }
+
+    function showTotalPricePage() {
+        showPage('totalPricePage');
+    }
+
+    function showDeliveryBoyPage() {
+        showPage('deliveryBoyPage');
+    }
+
+    function showContactPage() {
+        showPage('contactPage');
+    }
+
+    // Initialize with welcome page
+    showPage('welcomePage');
+</script>
+
+</body>	
+</html>
